@@ -9,7 +9,7 @@
         
         <h:panelGroup rendered="#{!sellerMBean.connected}">
             <h:form>
-                <h:commandButton value="Sign Up" action="signup.xhtml?face-redirect=true" />
+                <p:commandButton value="Sign Up" action="signup.xhtml?face-redirect=true" />
             </h:form>
             <h:form>
                 <h:panelGrid columns="2">
@@ -18,7 +18,7 @@
                     <h:outputLabel value="Password :" for="password" />
                     <p:inputText id="password" title="Password" value="#{sellerMBean.password}"/>
                 </h:panelGrid>
-                <h:commandButton value="Sign In" action="#{sellerMBean.signIn()}"/>
+                <p:commandButton value="Sign In" action="#{sellerMBean.signIn()}"/>
                 
             </h:form>
         </h:panelGroup>

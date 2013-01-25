@@ -13,11 +13,17 @@ import javax.persistence.*;
  * @author brunolarosa
  */
 @Entity
+@NamedQueries({
+    @NamedQuery(name="Shop.findAll", query="SELECT s FROM Shop s"),
+    @NamedQuery(name="Shop.finAllShopsForSeller", query="SELECT s FROM Shop s WHERE s.seller = :seller")
+})
 public class Shop implements Serializable {
     private static final long serialVersionUID = 1L;
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private int id;
+    
+    private String name;
     
     @ManyToOne(cascade={CascadeType.ALL}, fetch= FetchType.LAZY)
     private Seller seller;
@@ -32,6 +38,16 @@ public class Shop implements Serializable {
     public void setId(int id) {
         this.id = id;
     }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+    
+    
 
     public List<Product> getProducts() {
         return products;

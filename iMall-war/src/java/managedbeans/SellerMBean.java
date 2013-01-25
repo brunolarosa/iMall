@@ -77,7 +77,15 @@ public class SellerMBean implements Serializable {
 
     public void setConnected(boolean connected) {
         this.connected = connected;
-    }    
+    }
+
+    public Shop getCurrentShop() {
+        return currentShop;
+    }
+
+    public void setCurrentShop(Shop currentShop) {
+        this.currentShop = currentShop;
+    }
     
     
     
@@ -109,7 +117,7 @@ public class SellerMBean implements Serializable {
         
         return "index.xhtml?faces-redirect=true";
     }
-    public void signIn() {
+    public String signIn() {
         
         
         Seller seller = sellerManager.getSellerForLogin(login);
@@ -122,6 +130,9 @@ public class SellerMBean implements Serializable {
                 currentSeller = seller;
             }
         }
+        
+        return "index.xhtml?faces-redirect=true";
+       
     }
     
     
