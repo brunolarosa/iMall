@@ -1,0 +1,29 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE composition PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns:ui="http://java.sun.com/jsf/facelets"
+                template="./../../templates/template_general.xhtml"
+                xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:p="http://primefaces.org/ui">
+
+    <ui:define name="top">
+        top
+    </ui:define>
+
+    <ui:define name="left">
+        <h:panelGroup rendered="#{sellerMBean.connected}">
+            <ul>
+                <li><a href="./addShop.xhtml">Add Shop</a></li>
+                <li>Shops</li>
+            </ul>
+            
+            <ui:insert name="menu"></ui:insert>
+        </h:panelGroup>
+        
+    </ui:define>
+
+    <ui:define name="content">
+        <ui:insert name="content">Ici</ui:insert>
+    </ui:define>
+
+</ui:composition>

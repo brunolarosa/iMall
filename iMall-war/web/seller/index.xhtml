@@ -1,0 +1,29 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE composition PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns:ui="http://java.sun.com/jsf/facelets"
+                template="./templates/template_seller.xhtml"
+                xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:p="http://primefaces.org/ui">
+
+    <ui:define name="content">
+        
+        <h:panelGroup rendered="#{!sellerMBean.connected}">
+            <h:form>
+                <h:commandButton value="Sign Up" action="signup.xhtml?face-redirect=true" />
+            </h:form>
+            <h:form>
+                <h:panelGrid columns="2">
+                    <h:outputLabel value="Login :" for="login" />
+                    <p:inputText id="login" title="Login" value="#{sellerMBean.login}"/>
+                    <h:outputLabel value="Password :" for="password" />
+                    <p:inputText id="password" title="Password" value="#{sellerMBean.password}"/>
+                </h:panelGrid>
+                <h:commandButton value="Sign In" action="#{sellerMBean.signIn()}"/>
+                
+            </h:form>
+        </h:panelGroup>
+        
+        
+    </ui:define>
+
+</ui:composition>
