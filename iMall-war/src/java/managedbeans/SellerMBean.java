@@ -10,7 +10,9 @@ import java.io.Serializable;
 import java.util.List;
 import javax.ejb.EJB;
 import javax.enterprise.context.SessionScoped;
+import javax.faces.context.FacesContext;
 import javax.inject.Named;
+import javax.servlet.http.HttpSession;
 import sessions.SellerManager;
 import sessions.ShopManager;
 
@@ -148,6 +150,11 @@ public class SellerMBean implements Serializable {
         
         return "index.xhtml?faces-redirect=true";
        
+    }
+    
+    public String lougOut() {
+        FacesContext.getCurrentInstance().getExternalContext().invalidateSession();
+        return "../index?faces-redirect=true";
     }
     
     

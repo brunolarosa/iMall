@@ -23,16 +23,15 @@ import sessions.ProductManager;
 @Named(value = "productMBean")
 @SessionScoped
 public class ProductMBean implements Serializable {
+
     @EJB
     private ProductManager productManager;
-    
     private String name;
     private String imageUrl;
     private String description;
     private double price;
     private int quantity;
-    private boolean itemSelected = false; 
-
+    private boolean itemSelected = false;
     private Product currentProduct;
     private SearchItem selectedSearchItem;
     private String searchString;
@@ -116,9 +115,6 @@ public class ProductMBean implements Serializable {
     public void setItemSelected(boolean itemSelected) {
         this.itemSelected = itemSelected;
     }
-    
-    
-    
     /*
      * EBAY WS FIELDS
      */
@@ -187,6 +183,13 @@ public class ProductMBean implements Serializable {
 
             if (this.isItemSelected()) {
                 this.currentProduct = productManager.createProduct(name, bean.getCurrentShop(), imageUrl, description, price, quantity);
+                this.setImageUrl(null);
+                this.setName(null);
+                this.setDescription(null);
+                this.setPrice(0);
+                this.setQuantity(0);
+                this.setSearchItems(null);
+                this.setItemSelected(false);
             }
         }
 
