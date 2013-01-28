@@ -5,6 +5,7 @@
 package entities;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.List;
 import javax.persistence.*;
 
@@ -24,12 +25,18 @@ public class Shop implements Serializable {
     private int id;
     
     private String name;
+    private String address;
+    private String postalCode;
+    private String town;
     
-    @ManyToOne(cascade={CascadeType.ALL}, fetch= FetchType.LAZY)
+    @ManyToOne(cascade={CascadeType.ALL}, fetch= FetchType.EAGER)
     private Seller seller;
     
     @OneToMany(mappedBy="shop")
     private List<Product> products;
+
+    public Shop() {
+    }
 
     public int getId() {
         return id;
@@ -46,6 +53,32 @@ public class Shop implements Serializable {
     public void setName(String name) {
         this.name = name;
     }
+
+    public String getAddress() {
+        return address;
+    }
+
+    public void setAddress(String address) {
+        this.address = address;
+    }
+
+    public String getPostalCode() {
+        return postalCode;
+    }
+
+    public void setPostalCode(String postalCode) {
+        this.postalCode = postalCode;
+    }
+
+    public String getTown() {
+        return town;
+    }
+
+    public void setTown(String town) {
+        this.town = town;
+    }
+    
+    
     
     
 
@@ -64,6 +97,16 @@ public class Shop implements Serializable {
     public void setSeller(Seller seller) {
         this.seller = seller;
     }
+
+    public Shop(String name, String address, String postalCode, String town, Seller seller) {
+        this.name = name;
+        this.address = address;
+        this.postalCode = postalCode;
+        this.town = town;
+        this.seller = seller;
+        this.products = new ArrayList<Product>();
+    }
+    
     
     
 

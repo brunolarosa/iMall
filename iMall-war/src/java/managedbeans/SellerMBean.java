@@ -12,6 +12,7 @@ import javax.ejb.EJB;
 import javax.enterprise.context.SessionScoped;
 import javax.inject.Named;
 import sessions.SellerManager;
+import sessions.ShopManager;
 
 /**
  *
@@ -21,8 +22,16 @@ import sessions.SellerManager;
 @SessionScoped
 public class SellerMBean implements Serializable {
     
+    @EJB
+    private SellerManager sellerManager;
+    
+    @EJB
+    private ShopManager shopManager;
+    
+    
+    /* FIELDS */
     private String name;
-    private String mailAdress;
+    private String mailAddress;
     private String login;
     private String password;
     
@@ -47,12 +56,12 @@ public class SellerMBean implements Serializable {
         this.login = login;
     }
 
-    public String getMailAdress() {
-        return mailAdress;
+    public String getMailAddress() {
+        return mailAddress;
     }
 
-    public void setMailAdress(String mailAdress) {
-        this.mailAdress = mailAdress;
+    public void setMailAddress(String mailAddress) {
+        this.mailAddress = mailAddress;
     }
 
     public String getName() {
@@ -89,8 +98,9 @@ public class SellerMBean implements Serializable {
     
     
     
-    @EJB
-    private SellerManager sellerManager;
+
+    
+    
 
     /**
      * Creates a new instance of SellerMBean
@@ -106,17 +116,22 @@ public class SellerMBean implements Serializable {
         return sellerManager.getSellerForId(id);
     }
     
-    
+    public String showShop(Shop shop) {
+        this.setCurrentShop(shop);
+        return "indexShop?faces-redirect=true";
+    }
     
     public String signUp() {
-        sellerManager.createSeller(name, login, password, mailAdress);
+        sellerManager.createSeller(name, login, password, mailAddress);
         name = null;
         login = null;
         password = null;
-        mailAdress = null;
+        mailAddress = null;
         
         return "index.xhtml?faces-redirect=true";
     }
+    
+    
     public String signIn() {
         
         
@@ -134,7 +149,6 @@ public class SellerMBean implements Serializable {
         return "index.xhtml?faces-redirect=true";
        
     }
-    
     
     
 }

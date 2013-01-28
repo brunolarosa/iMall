@@ -12,17 +12,24 @@
 
     <ui:define name="left">
         <h:panelGroup rendered="#{sellerMBean.connected}">
-            <ul>
-                <li><a href="./addShop.xhtml">Add Shop</a></li>
-                <li>Shops</li>
-            </ul>
+            <h:form>
+                <p:menu>
+                <p:submenu label="Product">  
+                    <p:menuitem value="My shops" action="index?faces-redirect=true" icon="ui-icon-arrowrefresh-1-w"/>
+                    <p:menuitem value="Add shop" action="addShop?faces-redirect=true" icon="ui-icon-arrowrefresh-1-w"/>
+                </p:submenu>
+
+                <ui:insert name="menu"></ui:insert>
+            </p:menu>
+            </h:form>
             
-            <ui:insert name="menu"></ui:insert>
+
         </h:panelGroup>
-        
+
     </ui:define>
 
     <ui:define name="content">
+
         <ui:insert name="content">Ici</ui:insert>
     </ui:define>
 

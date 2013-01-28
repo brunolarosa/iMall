@@ -1,29 +1,38 @@
 <?xml version='1.0' encoding='UTF-8' ?>
 <!DOCTYPE composition PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-<ui:composition xmlns:ui="http://java.sun.com/jsf/facelets"
-                template="./templates/template_seller.xhtml"
+<ui:composition template="./templates/default.xhtml"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+
                 xmlns:h="http://java.sun.com/jsf/html"
-                xmlns:p="http://primefaces.org/ui">
+                xmlns:p="http://primefaces.org/ui"
+                xmlns:f="http://java.sun.com/jsf/core">
 
     <ui:define name="content">
-        
-        <h:panelGroup rendered="#{!sellerMBean.connected}">
+
             <h:form>
-                <p:commandButton value="Sign Up" action="signup.xhtml?face-redirect=true" />
+                <h:dataTable value="#{sellerMBean.currentSeller.shops}" var="shop" class="table table-hover">
+                    <h:column>
+                        <f:facet name="header">
+                            <h:outputText value="#"/>
+                        </f:facet>
+                        <h:commandLink value="#{shop.id}" action="#{sellerMBean.showShop(shop)}" />
+                    </h:column>
+                    <h:column>
+                        <f:facet name="header">
+                            <h:outputText value="Name"/>
+                        </f:facet>
+                        <h:commandLink value="#{shop.name}" action="#{sellerMBean.showShop(shop)}" />
+                    </h:column>
+                    <h:column>
+                        <f:facet name="header">
+                            <h:outputText value="Products"/>
+                        </f:facet>
+                        <h:outputText value="#{shop.products.size()}" />
+                    </h:column>
+                </h:dataTable>
             </h:form>
-            <h:form>
-                <h:panelGrid columns="2">
-                    <h:outputLabel value="Login :" for="login" />
-                    <p:inputText id="login" title="Login" value="#{sellerMBean.login}"/>
-                    <h:outputLabel value="Password :" for="password" />
-                    <p:inputText id="password" title="Password" value="#{sellerMBean.password}"/>
-                </h:panelGrid>
-                <p:commandButton value="Sign In" action="#{sellerMBean.signIn()}"/>
-                
-            </h:form>
-        </h:panelGroup>
-        
-        
+
+
     </ui:define>
 
 </ui:composition>

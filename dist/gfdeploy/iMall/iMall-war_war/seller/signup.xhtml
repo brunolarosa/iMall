@@ -1,33 +1,73 @@
-<?xml version='1.0' encoding='UTF-8' ?>
-<!DOCTYPE composition PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-<ui:composition template="./templates/template_seller.xhtml"
+<?xml version='1.0' encoding='UTF-8' ?> 
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition template="./../templates/template_general.xhtml"
                 xmlns="http://www.w3.org/1999/xhtml"
-                xmlns:h="http://java.sun.com/jsf/html"
-                xmlns:f="http://java.sun.com/jsf/core"
-                xmlns:c="http://java.sun.com/jsp/jstl/core"
                 xmlns:ui="http://java.sun.com/jsf/facelets"
-                xmlns:p="http://primefaces.org/ui">
+                xmlns:f="http://java.sun.com/jsf/core"
+                xmlns:h="http://java.sun.com/jsf/html">
 
+    <ui:define name="css">
+        <style type="text/css">
+            body {
+                padding-top: 40px;
+                padding-bottom: 40px;
+                background-color: #f5f5f5;
+            }
+
+            .form-signin {
+                max-width: 300px;
+                padding: 19px 29px 29px;
+                margin: 0 auto 20px;
+                background-color: #fff;
+                border: 1px solid #e5e5e5;
+                -webkit-border-radius: 5px;
+                -moz-border-radius: 5px;
+                border-radius: 5px;
+                -webkit-box-shadow: 0 1px 2px rgba(0,0,0,.05);
+                -moz-box-shadow: 0 1px 2px rgba(0,0,0,.05);
+                box-shadow: 0 1px 2px rgba(0,0,0,.05);
+            }
+            .form-signin .form-signin-heading,
+            .form-signin .checkbox {
+                margin-bottom: 10px;
+            }
+            .form-signin input[type="text"],
+            .form-signin input[type="password"] {
+                font-size: 16px;
+                height: auto;
+                margin-bottom: 15px;
+                padding: 7px 9px;
+            }
+
+        </style>
+    </ui:define>
 
     <ui:define name="content">
-        <f:view>
+        <h:form class="form-signin">
             <h:form>
-                <h1><h:outputText value="Sign Up"/></h1>
+                <h2><h:outputText value="Sign Up"/></h2>
                 <h:panelGrid columns="2">
                     <h:outputLabel value="Name:" for="name" />
-                    <p:inputText id="name" title="Name" value="#{sellerMBean.name}"/>
+                    <h:inputText id="name" title="Name" value="#{sellerMBean.name}"/>
                     <h:outputLabel value="Login:" for="login" />
-                    <p:inputText id="login" title="Login" value="#{sellerMBean.login}"/>
+                    <h:inputText id="login" title="Login" value="#{sellerMBean.login}"/>
                     <h:outputLabel value="Mail Adress:" for="mailAdress" />
-                    <p:inputText id="mailAdress" title="MailAdress" value="#{sellerMBean.mailAdress}"/>
+                    <h:inputText id="mailAdress" title="MailAdress" value="#{sellerMBean.mailAddress}"/>
                     <h:outputLabel value="Password:" for="password" />
-                    <p:inputText id="password" title="Password" required="true" value="#{sellerMBean.password}"/>
+                    <h:inputSecret id="password" title="Password" required="true" value="#{sellerMBean.password}"/>
                 </h:panelGrid>
 
-                <p:commandButton value="Sign Up" action="#{sellerMBean.signUp()}"/>
+                <h:commandButton class="btn btn-large btn-primary" action="#{sellerMBean.signUp()}" value="Sign Up"/>
             </h:form>
-        </f:view>
+        </h:form>
+
+
+
 
     </ui:define>
 
+    <ui:define name="javascript">
+    </ui:define>
+
 </ui:composition>
+

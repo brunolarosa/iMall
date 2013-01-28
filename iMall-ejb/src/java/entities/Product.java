@@ -32,12 +32,26 @@ public class Product implements Serializable {
     
     private String name;
     
-    @ManyToOne(cascade={CascadeType.ALL}, fetch= FetchType.LAZY)
+    @ManyToOne(cascade={CascadeType.MERGE}, fetch= FetchType.EAGER)
     private Shop shop;
     
     private String imageUrl;
     private String description;
     private double price;
+    private int quantity;
+
+    public Product() {
+    }
+
+    public Product(String name, Shop shop, String imageUrl, String description, double price, int quantity) {
+        this.name = name;
+        this.shop = shop;
+        this.imageUrl = imageUrl;
+        this.description = description;
+        this.price = price;
+        this.quantity = quantity;
+    }
+    
     
     
     
@@ -65,6 +79,39 @@ public class Product implements Serializable {
     public void setShop(Shop shop) {
         this.shop = shop;
     }
+
+    public String getDescription() {
+        return description;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
+    }
+
+    public String getImageUrl() {
+        return imageUrl;
+    }
+
+    public void setImageUrl(String imageUrl) {
+        this.imageUrl = imageUrl;
+    }
+
+    public double getPrice() {
+        return price;
+    }
+
+    public void setPrice(double price) {
+        this.price = price;
+    }
+
+    public int getQuantity() {
+        return quantity;
+    }
+
+    public void setQuantity(int quantity) {
+        this.quantity = quantity;
+    }
+    
 
     
     

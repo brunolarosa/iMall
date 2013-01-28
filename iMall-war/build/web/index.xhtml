@@ -1,22 +1,36 @@
-<?xml version='1.0' encoding='UTF-8' ?>
-<!DOCTYPE composition PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+<?xml version='1.0' encoding='UTF-8' ?> 
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition template="./templates/template_general.xhtml"
+                xmlns="http://www.w3.org/1999/xhtml"
                 xmlns:ui="http://java.sun.com/jsf/facelets"
-                template="./templates/template_general.xhtml"
                 xmlns:f="http://java.sun.com/jsf/core"
                 xmlns:h="http://java.sun.com/jsf/html">
 
-    <ui:define name="top">
-        top
-    </ui:define>
-
-    <ui:define name="left">
-        
-            
-    </ui:define>
 
     <ui:define name="content">
-        
+        <div class="masthead">
+            <ul class="nav nav-pills pull-right">
+                <li><a href="#">Buyer</a></li>
+                <li><a href="./seller/index.xhtml">Seller</a></li>
+            </ul>
+            <h3 class="muted">iMall Project</h3>
+        </div>
+
+        <hr />
+
+        <div class="jumbotron">
+            <h1>iMall Project</h1>
+            <p class="lead">C'est un projet de MASTER 2 MIAGE NTDP, réalisé dans le cadre de la matière Service Web.</p>
+            <a class="btn btn-large btn-primary" href="#">I'm a Buyer</a> <a class="btn btn-large btn-success" href="./seller/index.xhtml">I'm a Seller</a>
+        </div>
+
+
+        <hr />
+
+        <div class="footer">
+            <p>&copy; Sarah FOUBERT, Bruno LAROSA - 2013</p>
+        </div>
+
 
     </ui:define>
 

@@ -21,6 +21,7 @@ import javax.persistence.Query;
 @Stateless
 @LocalBean
 public class ProductManager {
+
     @PersistenceContext(unitName = "iMall-ejbPU")
     private EntityManager em;
 
@@ -34,9 +35,13 @@ public class ProductManager {
         return query.getResultList();
     }
 
-    
-    
-    
-    
-    
+    public Product createProduct(String name, Shop shop, String imageUrl, String description, double price, int quantity) {
+
+        Product product = new Product(name, shop, imageUrl, description, price, quantity);
+
+        shop.getProducts().add(product);
+        persist(product);
+
+        return product;
+    }
 }

@@ -1,0 +1,72 @@
+<?xml version='1.0' encoding='UTF-8' ?> 
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:ui="http://java.sun.com/jsf/facelets">
+
+    <h:head>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+        <title>iMall - Seller</title>
+
+        <!-- Bootstrap -->
+        <link href="./../../resources/bootstrap/css/bootstrap.min.css" rel="stylesheet" media="screen" />
+
+        <style type="text/css">
+            body {
+                padding-top: 60px;
+                padding-bottom: 40px;
+            }
+            .sidebar-nav {
+                padding: 9px 0;
+            }
+        </style>
+        <ui:insert name="css"></ui:insert>
+    </h:head>
+
+    <h:body>
+
+        <div class="navbar navbar-inverse navbar-fixed-top">
+            <div class="navbar-inner">
+                <div class="container-fluid">
+                    <a class="brand" href="./index.xhtml">iMall</a>
+                    <div class="nav-collapse collapse">
+                        <p class="navbar-text pull-right">
+                            <a href="#"><i class="icon-off icon-white" /> Log Out</a>
+                        </p>
+
+                    </div><!--/.nav-collapse -->
+                </div>
+            </div>
+        </div>
+
+        <div class="container-fluid">
+            <div class="row-fluid">
+                <div class="span3">
+                    <div class="well sidebar-nav">
+                        <ul class="nav nav-list">
+                            <li class="nav-header">Shop</li>
+                            <li><a href="./index.xhtml">My Shops</a></li>
+                            <li><a href="./addShop.xhtml">Add a Shop</a></li>
+                            
+                            <ui:insert name="nav"></ui:insert>
+                        </ul>
+                    </div><!--/.well -->
+                </div><!--/span-->
+                <div class="span9">
+                    <ui:insert name="content"></ui:insert>
+                </div>
+            </div><!--/row-->
+
+            <hr />
+
+            <footer>
+                <p>&copy; Sarah FOUBERT, Bruno LAROSA - 2013</p>
+            </footer>
+
+        </div>
+
+
+    </h:body>
+
+</html>

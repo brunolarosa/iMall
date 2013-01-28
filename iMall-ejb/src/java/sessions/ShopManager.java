@@ -30,6 +30,14 @@ public class ShopManager {
         return null;
     }
     
+    public Shop createShop(String name, String address, String postalCode, String town, Seller seller) {
+        Shop shop = new Shop(name, address, postalCode, town, seller);
+        seller.getShops().add(shop);
+        persist(shop);
+        
+        return shop;
+    }
+    
     
 
     

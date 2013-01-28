@@ -1,13 +1,63 @@
 <?xml version='1.0' encoding='UTF-8' ?>
 <!DOCTYPE composition PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-<ui:composition xmlns:ui="http://java.sun.com/jsf/facelets"
-                template="./templates/template_seller.xhtml">
+<ui:composition template="./templates/template_shop.xhtml"
+                xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:f="http://java.sun.com/jsf/core"
+                xmlns:c="http://java.sun.com/jsp/jstl/core"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                xmlns:p="http://primefaces.org/ui">
 
     <ui:define name="content">
         
         
-        
-        
+        <f:view>
+            <h:form>
+                <h:panelGrid columns="2">
+                    <h:outputLabel value="Search :" for="search" />
+                    <h:inputText id="search" value="#{productMBean.searchString}" title="Search" />
+                    
+                    <p:commandButton action="#{productMBean.searchMatchingItems()}" value="Search" update="searchItems"/>
+                    
+                    
+                </h:panelGrid>
+                
+                <p:dataTable rendered="#{null != productMBean.searchItems}" value="#{productMBean.searchItems}" var="item" id="searchItems" paginator="true" rows="5">
+                    <p:column>
+                        <f:facet name="header">
+                            <h:outputText value="Photo"/>
+                        </f:facet>
+                        <img src="#{item.galleryURL}" style="height: 80px;"/>
+                    </p:column>
+                    <p:column>
+                        <f:facet name="header">
+                            <h:outputText value="Title"/>
+                        </f:facet>
+                        <h:outputText value="#{item.title}"/>
+                    </p:column>
+                    <p:column>
+                        <f:facet name="header">
+                            <h:outputText value="Choose"/>
+                        </f:facet>
+                        <h:commandButton action="#{productMBean.selectSearchItem(item)}" value="Add"/>
+                    </p:column>
+                </p:dataTable>
+            </h:form>
+
+            <h:form rendered="#{productMBean.itemSelected}">
+                <h:panelGrid columns="2">
+                    <h:outputLabel value="Name:" for="name" />
+                    <p:inputText id="name" value="#{productMBean.name}" title="Name" />
+                    <h:outputLabel value="Description: " for="description" />
+                    <p:inputText id="description" value="#{productMBean.description}" title="Description" />
+                    <h:outputLabel value="Price:" for="price" />
+                    <p:inputText id="price" value="#{productMBean.price}" title="Price" />
+                    
+                </h:panelGrid>
+                
+                <p:commandButton action="#{productMBean.createProduct()}" value="Create"/>
+            </h:form>
+        </f:view>
         
     </ui:define>
 
