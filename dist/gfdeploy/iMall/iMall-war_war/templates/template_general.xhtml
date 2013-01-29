@@ -10,24 +10,25 @@
         <title>iMall</title>
 
         <!-- Bootstrap -->
-        <link href="./resources/bootstrap/css/bootstrap.min.css" rel="stylesheet" media="screen" />
-        
+        <h:outputStylesheet library="bootstrap/css" name="bootstrap.min.css"/>
+
         <ui:insert name="css">
-            
             <link href="./resources/css/default.css" rel="stylesheet" media="screen" />
         </ui:insert>
     </h:head>
 
     <h:body>
-        <div class="container-narrow">
 
-            <ui:insert name="content">Content</ui:insert>
 
-        </div>
+        <ui:insert name="container">
+            
+            Content
+        
+        </ui:insert>
 
         <script src="http://code.jquery.com/jquery-latest.js"></script>
         <script src="../resources/bootstrap/js/bootstrap.min.js"></script>
-        
+
         <ui:insert name="javascript"></ui:insert>
     </h:body>
 

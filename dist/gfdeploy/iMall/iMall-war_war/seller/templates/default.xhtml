@@ -1,78 +1,131 @@
 <?xml version='1.0' encoding='UTF-8' ?> 
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-<html xmlns="http://www.w3.org/1999/xhtml"
-      xmlns:h="http://java.sun.com/jsf/html"
-      xmlns:f="http://java.sun.com/jsf/core"
-      xmlns:ui="http://java.sun.com/jsf/facelets">
+<ui:composition template="./../../templates/template_general.xhtml"
+                xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                xmlns:f="http://java.sun.com/jsf/core"
+                xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:c="http://java.sun.com/jsp/jstl/core">
 
-    <h:head>
-        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-        <title>iMall - Seller</title>
 
-        <!-- Bootstrap -->
-        <link href="./../../resources/bootstrap/css/bootstrap.min.css" rel="stylesheet" media="screen" />
+    <ui:define name="css">
+        <c:if test="#{sellerMBean.connected}">
+            <style type="text/css">
+                body {
+                    padding-top: 60px;
+                    padding-bottom: 40px;
+                }
+                .sidebar-nav {
+                    padding: 9px 0;
+                }
+            </style>
+        </c:if>
+        <c:if test="#{!sellerMBean.connected}">
+            <style type="text/css">
+                body {
+                    padding-top: 40px;
+                    padding-bottom: 40px;
+                    background-color: #f5f5f5;
+                }
 
-        <style type="text/css">
-            body {
-                padding-top: 60px;
-                padding-bottom: 40px;
-            }
-            .sidebar-nav {
-                padding: 9px 0;
-            }
-        </style>
-        <ui:insert name="css"></ui:insert>
-    </h:head>
+                .form-signin {
+                    max-width: 300px;
+                    padding: 19px 29px 29px;
+                    margin: 0 auto 20px;
+                    background-color: #fff;
+                    border: 1px solid #e5e5e5;
+                    -webkit-border-radius: 5px;
+                    -moz-border-radius: 5px;
+                    border-radius: 5px;
+                    -webkit-box-shadow: 0 1px 2px rgba(0,0,0,.05);
+                    -moz-box-shadow: 0 1px 2px rgba(0,0,0,.05);
+                    box-shadow: 0 1px 2px rgba(0,0,0,.05);
+                }
+                .form-signin .form-signin-heading,
+                .form-signin .checkbox {
+                    margin-bottom: 10px;
+                }
+                .form-signin input[type="text"],
+                .form-signin input[type="password"] {
+                    font-size: 16px;
+                    height: auto;
+                    margin-bottom: 15px;
+                    padding: 7px 9px;
+                }
 
-    <h:body>
+            </style>
+        </c:if>
 
-        <div class="navbar navbar-inverse navbar-fixed-top">
-            <div class="navbar-inner">
-                <div class="container-fluid">
-                    <a class="brand" href="./index.xhtml">iMall</a>
-                    <div class="nav-collapse collapse">
-                        <p class="navbar-text pull-right">
-                            <h:form>
-                                <i class="icon-off icon-white" /><h:commandLink action="#{sellerMBean.lougOut()}" value="Log Out"/>
-                            </h:form>
-                        </p>
+    </ui:define>
 
-                    </div><!--/.nav-collapse -->
+    <ui:define name="container">
+
+        <c:if test="#{sellerMBean.connected}">
+            <div class="navbar navbar-inverse navbar-fixed-top">
+                <div class="navbar-inner">
+                    <div class="container-fluid">
+                        <a class="brand" href="./index.xhtml">iMall</a>
+                        <div class="nav-collapse collapse">
+                            <p class="navbar-text pull-right">
+                                <h:form>
+                                    <i class="icon-off icon-white" /><h:commandLink action="#{sellerMBean.lougOut()}" value="Log Out"/>
+                                </h:form>
+                            </p>
+
+                        </div><!--/.nav-collapse -->
+                    </div>
                 </div>
             </div>
-        </div>
 
-        <div class="container-fluid">
-            <div class="row-fluid">
-                <div class="span3">
-                    <div class="well sidebar-nav">
-                        <ul class="nav nav-list">
-                            <li class="nav-header">Shop</li>
-                            <li><a href="./index.xhtml">My Shops</a></li>
-                            <li><a href="./addShop.xhtml">Add a Shop</a></li>
-                            
-                            <ui:insert name="nav"></ui:insert>
-                        </ul>
-                    </div><!--/.well -->
-                </div><!--/span-->
-                <div class="span9">
-                    <ui:insert name="content"></ui:insert>
-                </div>
-            </div><!--/row-->
+            <div class="container-fluid">
+                <div class="row-fluid">
+                    <div class="span3">
+                        <div class="well sidebar-nav">
+                            <ul class="nav nav-list">
+                                <li class="nav-header">Shop</li>
+                                <li><a href="./index.xhtml">My Shops</a></li>
+                                <li><a href="./addShop.xhtml">Add a Shop</a></li>
 
-            <hr />
+                                <ui:insert name="nav"></ui:insert>
+                            </ul>
+                        </div><!--/.well -->
+                    </div><!--/span-->
+                    <div class="span9">
+                        <ui:insert name="content"></ui:insert>
+                    </div>
+                </div><!--/row-->
 
-            <footer>
-                <p>&copy; Sarah FOUBERT, Bruno LAROSA - 2013</p>
-            </footer>
+                <hr />
+            </div>
 
-        </div>
+        </c:if>
+        <c:if test="#{!sellerMBean.connected}">
+            <div class="container-narrow">
+                <h:form class="form-signin">
+                    <h2 class="form-signin-heading">Please sign in</h2>
+                    <label>Login :</label>
+                    <h:inputText class="input-block-level" value="#{sellerMBean.login}" />
+                    <label>Password :</label>
+                    <h:inputSecret class="input-block-level" value="#{sellerMBean.password}" />
 
-        <script src="http://code.jquery.com/jquery-latest.js"></script>
-        <script src="../resources/bootstrap/js/bootstrap.min.js"></script>
-        
-        <ui:insert name="javascript"></ui:insert>
+                    <h:commandButton class="btn btn-large btn-primary" action="#{sellerMBean.signIn()}" value="Sign In"/>
 
-    </h:body>
 
-</html>
+                    <hr />
+                    <h2 class="form-signin-heading">I'm a new seller !</h2>
+                    <h:commandButton class="btn btn-large btn-primary" action="signup?faces-redirect=true" value="Sign Up"/>
+                </h:form>
+
+            </div>
+        </c:if>
+
+    </ui:define>
+
+    <ui:define name="javascript">
+    </ui:define>
+
+
+
+
+
+</ui:composition>

@@ -160,7 +160,7 @@ public class SellerMBean implements Serializable {
     
     public String lougOut() {
         FacesContext.getCurrentInstance().getExternalContext().invalidateSession();
-        return "../index?faces-redirect=true";
+        return "index?faces-redirect=true";
     }
     
     

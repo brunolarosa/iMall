@@ -42,27 +42,28 @@
         </style>
     </ui:define>
 
-    <ui:define name="content">
-        <h:form class="form-signin">
-            <h:form>
-                <h2><h:outputText value="Sign Up"/></h2>
-                <h:panelGrid columns="2">
-                    <h:outputLabel value="Name:" for="name" />
-                    <h:inputText id="name" title="Name" value="#{sellerMBean.name}"/>
-                    <h:outputLabel value="Login:" for="login" />
-                    <h:inputText id="login" title="Login" value="#{sellerMBean.login}"/>
-                    <h:outputLabel value="Mail Adress:" for="mailAdress" />
-                    <h:inputText id="mailAdress" title="MailAdress" value="#{sellerMBean.mailAddress}"/>
-                    <h:outputLabel value="Password:" for="password" />
-                    <h:inputSecret id="password" title="Password" required="true" value="#{sellerMBean.password}"/>
-                </h:panelGrid>
+    <ui:define name="container">
+        <div class="container-narrow">
+            <h:form class="form-signin">
+                <h:form>
+                    <h2><h:outputText value="Sign Up"/></h2>
+                    <h:panelGrid columns="2">
+                        <h:outputLabel value="Name:" for="name" />
+                        <h:inputText id="name" title="Name" value="#{sellerMBean.name}"/>
+                        <h:outputLabel value="Login:" for="login" />
+                        <h:inputText id="login" title="Login" value="#{sellerMBean.login}"/>
+                        <h:outputLabel value="Mail Adress:" for="mailAdress" />
+                        <h:inputText id="mailAdress" title="MailAdress" value="#{sellerMBean.mailAddress}"/>
+                        <h:outputLabel value="Password:" for="password" />
+                        <h:inputSecret id="password" title="Password" required="true" value="#{sellerMBean.password}"/>
+                    </h:panelGrid>
 
-                <h:commandButton class="btn btn-large btn-primary" action="#{sellerMBean.signUp()}" value="Sign Up"/>
+                    <h:commandButton class="btn btn-large btn-primary" action="#{sellerMBean.signUp()}" value="Sign Up"/>
+                </h:form>
             </h:form>
-        </h:form>
 
 
-
+        </div>
 
     </ui:define>
 

@@ -43,22 +43,23 @@
     </ui:define>
 
     <ui:define name="content">
-        <h:form class="form-signin">
-            <h2 class="form-signin-heading">Please sign in</h2>
-            <label>Login :</label>
-            <h:inputText class="input-block-level" value="#{sellerMBean.login}" />
-            <label>Password :</label>
-            <h:inputSecret class="input-block-level" value="#{sellerMBean.password}" />
+        <div class="container-narrow">
+            <h:form class="form-signin">
+                <h2 class="form-signin-heading">Please sign in</h2>
+                <label>Login :</label>
+                <h:inputText class="input-block-level" value="#{sellerMBean.login}" />
+                <label>Password :</label>
+                <h:inputSecret class="input-block-level" value="#{sellerMBean.password}" />
 
-            <h:commandButton class="btn btn-large btn-primary" action="#{sellerMBean.signIn()}" value="Sign In"/>
-
-
-            <hr />
-            <h2 class="form-signin-heading">I'm a new seller !</h2>
-            <h:commandButton class="btn btn-large btn-primary" action="signup?faces-redirect=true" value="Sign Up"/>
-        </h:form>
+                <h:commandButton class="btn btn-large btn-primary" action="#{sellerMBean.signIn()}" value="Sign In"/>
 
 
+                <hr />
+                <h2 class="form-signin-heading">I'm a new seller !</h2>
+                <h:commandButton class="btn btn-large btn-primary" action="signup?faces-redirect=true" value="Sign Up"/>
+            </h:form>
+
+        </div>
 
 
     </ui:define>
