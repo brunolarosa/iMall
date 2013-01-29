@@ -38,10 +38,17 @@ public class ProductManager {
     public Product createProduct(String name, Shop shop, String imageUrl, String description, double price, int quantity) {
 
         Product product = new Product(name, shop, imageUrl, description, price, quantity);
-
         shop.getProducts().add(product);
+        em.merge(shop);
         persist(product);
+        
+        
 
+        return product;
+    }
+    
+    public Product mergeProduct(Product product) {
+        em.merge(product);
         return product;
     }
 }

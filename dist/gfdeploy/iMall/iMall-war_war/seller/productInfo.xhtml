@@ -1,0 +1,55 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE composition PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition template="./templates/default.xhtml"
+                xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:f="http://java.sun.com/jsf/core">
+
+    <ui:define name="content">
+        
+        <h:form class="form-horizontal">
+            <img class="img-rounded" src="#{productMBean.currentProduct.imageUrl}" />
+
+            <div class="control-group">
+                <label class="control-label" for="inputId">Id :</label>
+                <div class="controls">
+                    <h:inputText id="inputId" class="span5" value="#{productMBean.currentProduct.id}" disabled="true" />
+                </div>
+            </div>
+            <div class="control-group">
+                <label class="control-label" for="inputName">Name :</label>
+                <div class="controls">
+                    <h:inputText id="inputName" class="span5" value="#{productMBean.currentProduct.name}" />
+                </div>
+            </div>
+            <div class="control-group">
+                <label class="control-label" for="description">Description :</label>
+                <div class="controls">
+                    <h:inputText id="description" class="span5" value="#{productMBean.currentProduct.description}" title="Description" />
+                </div>
+            </div>
+            <div class="control-group">
+                <label class="control-label" for="price">Price :</label>
+                <div class="controls">
+                    <div class="input-prepend input-append">
+                        <h:inputText id="appendedPrependedInput" name="price" type="text" value="#{productMBean.currentProduct.price}"/>
+                        <span class="add-on">€</span>
+                    </div>
+                </div>
+            </div>
+            <div class="control-group">
+                <label class="control-label" for="quantity">Quantity :</label>
+                <div class="controls">
+                    <h:inputText id="quantity" class="span5" value="#{productMBean.currentProduct.quantity}" title="Quantity" />
+                </div>
+            </div>
+
+            <div class="form-actions">
+                <h:commandButton type="submit" class="btn btn-primary" value="Edit Product" action="#{productMBean.editProduct()}"/>
+            </div>
+        </h:form>
+        
+
+    </ui:define>
+</ui:composition>

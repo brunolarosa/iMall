@@ -32,10 +32,14 @@ public class ProductMBean implements Serializable {
     private double price;
     private int quantity;
     private boolean itemSelected = false;
+    
     private Product currentProduct;
     private SearchItem selectedSearchItem;
     private String searchString;
 
+    private SellerMBean sellerMBean;
+    
+    
     public Product getCurrentProduct() {
         return currentProduct;
     }
@@ -115,6 +119,16 @@ public class ProductMBean implements Serializable {
     public void setItemSelected(boolean itemSelected) {
         this.itemSelected = itemSelected;
     }
+
+    public SellerMBean getSellerMBean() {
+        if(null == sellerMBean) {
+            sellerMBean = (SellerMBean) FacesContext.getCurrentInstance().getApplication().evaluateExpressionGet(FacesContext.getCurrentInstance(), "#{sellerMBean}", SellerMBean.class);
+        }
+        return sellerMBean;
+    }
+    
+    
+    
     /*
      * EBAY WS FIELDS
      */
@@ -176,13 +190,11 @@ public class ProductMBean implements Serializable {
 
     public String createProduct() {
 
-        SellerMBean bean = (SellerMBean) FacesContext.getCurrentInstance().getApplication().evaluateExpressionGet(FacesContext.getCurrentInstance(), "#{sellerMBean}", SellerMBean.class);
-
-        if (bean.isConnected()
-                == true && bean.getCurrentSeller() != null) {
+        if (this.getSellerMBean().isConnected()
+                == true && this.getSellerMBean().getCurrentSeller() != null) {
 
             if (this.isItemSelected()) {
-                this.currentProduct = productManager.createProduct(name, bean.getCurrentShop(), imageUrl, description, price, quantity);
+                this.currentProduct = productManager.createProduct(name, this.getSellerMBean().getCurrentShop(), imageUrl, description, price, quantity);
                 this.setImageUrl(null);
                 this.setName(null);
                 this.setDescription(null);
@@ -193,6 +205,33 @@ public class ProductMBean implements Serializable {
             }
         }
 
+        return "indexShop?faces-redirect=true";
+    }
+    
+    public String showProduct(Product product) {
+        
+        if(this.getSellerMBean().isConnected() && product.getShop().getSeller().equals(this.getSellerMBean().getCurrentSeller())) {
+          
+            this.setCurrentProduct(product);  
+        
+        } else {
+            
+        }
+        
+              
+        
+        return "productInfo?faces-redirect=true";
+    }
+    
+    public String editProduct() {
+        if(this.getSellerMBean().isConnected() && this.getCurrentProduct().getShop().getSeller().equals(this.getSellerMBean().getCurrentSeller())) {
+          
+            productManager.mergeProduct(this.getCurrentProduct());
+        
+        } else {
+            
+        }
+        
         return "indexShop?faces-redirect=true";
     }
 }

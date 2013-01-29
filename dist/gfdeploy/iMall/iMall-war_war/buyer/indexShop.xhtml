@@ -1,0 +1,68 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE composition PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition template="./templates/default.xhtml"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:p="http://primefaces.org/ui"
+                xmlns:f="http://java.sun.com/jsf/core">
+
+    <ui:define name="css">
+    </ui:define>
+
+    <ui:define name="nav">
+    </ui:define>
+
+    <ui:define name="content">
+        <div id="row-fluid">
+            <div class="span4">
+                <h2>#{shopMBean.currentShop.name}</h2>
+            </div>
+            <div class="span4 offset1">
+                <h:form>
+                   <address>
+                    <strong><h:commandLink value="#{shopMBean.currentShop.seller.name}" action="#{sellerMBean.showSeller(shopMBean.currentShop.seller)}" /></strong><br />
+                    #{shopMBean.currentShop.address}<br />
+                    #{shopMBean.currentShop.postalCode} #{shopMBean.currentShop.town}
+                </address> 
+                </h:form>
+            </div>
+        </div>
+        <div id="row-fluid">
+            <h:form>
+                <h:dataTable value="#{shopMBean.currentShop.products}" var="product" class="table table-hover">
+                    <h:column>
+                        <f:facet name="header">
+                            <h:outputText value="Icon"/>
+                        </f:facet>
+                        <img src="#{product.imageUrl}" class="img-rounded"/>
+                    </h:column>
+                    <h:column>
+                        <f:facet name="header">
+                            <h:outputText value="Name"/>
+                        </f:facet>
+                        <h:commandLink value="#{product.name}" action="#{productMBean.showProduct(product)}" />
+                    </h:column>
+                    <h:column>
+                        <f:facet name="header">
+                            <h:outputText value="Price"/>
+                        </f:facet>
+                        <h:outputText value="#{product.price}€" />
+                    </h:column>
+                    <h:column>
+                        <f:facet name="header">
+                            <h:outputText value=""/>
+                        </f:facet>
+                        <h:commandButton class="btn btn-success" value="Buy" action="#{buyerMBean.addProductToShoppingCart(product)}" disabled="#{!(product.quantity > 0)}"/>
+                    </h:column>
+
+
+                </h:dataTable>
+            </h:form>
+        </div>
+    </ui:define>
+
+    <ui:define name="javascript">
+    </ui:define>
+
+</ui:composition>

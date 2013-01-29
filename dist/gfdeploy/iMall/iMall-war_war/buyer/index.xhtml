@@ -1,0 +1,54 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE composition PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition template="./templates/default.xhtml"
+                xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+
+                xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:p="http://primefaces.org/ui"
+                xmlns:f="http://java.sun.com/jsf/core">
+
+    <!-- Add CSS -->
+    <ui:define name="css">
+    </ui:define>
+
+    <ui:define name="nav">
+    </ui:define>
+
+    <ui:define name="content">
+
+        <div id="row-fluid">
+            <h2>Stores</h2>
+        </div>
+        <div id="row-fluid">
+
+            <h:form>
+                <h:dataTable value="#{shopMBean.allShops}" var="shop" class="table table-hover">
+                    <h:column>
+                        <f:facet name="header">
+                            <h:outputText value="Store"/>
+                        </f:facet>
+                        <h:commandLink value="#{shop.name}" action="#{shopMBean.showShop(shop)}" />
+                    </h:column>
+                    <h:column>
+                        <f:facet name="header">
+                            <h:outputText value="Seller"/>
+                        </f:facet>
+                        <h:commandLink value="#{shop.seller.name}" action="#{sellerMBean.showSeller(shop.seller)}" />
+                    </h:column>
+                    <h:column>
+                        <f:facet name="header">
+                            <h:outputText value="Products"/>
+                        </f:facet>
+                        <h:outputText value="#{shop.products.size()}" />
+                    </h:column>
+                </h:dataTable>
+            </h:form>
+
+        </div>
+    </ui:define>
+
+    <ui:define name="javascript">
+    </ui:define>
+
+</ui:composition>

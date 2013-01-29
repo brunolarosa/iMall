@@ -114,6 +114,12 @@ public class SellerMBean implements Serializable {
         return sellerManager.getAllSellers();
     }
     
+    public String showSeller(Seller seller) {
+        this.currentSeller = seller;
+        return "indexSeller?faces-redirect=true";
+    }
+    
+    
     public Seller getSellerForId(int id) {
         return sellerManager.getSellerForId(id);
     }

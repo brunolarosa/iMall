@@ -27,7 +27,7 @@
                     <f:facet name="header">
                         <h:outputText value="Name"/>
                     </f:facet>
-                    <h:commandLink value="#{product.name}" action="#" />
+                    <h:commandLink value="#{product.name}" action="#{productMBean.showProduct(product)}" />
                 </h:column>
                 <h:column>
                     <f:facet name="header">

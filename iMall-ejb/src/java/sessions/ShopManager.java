@@ -11,6 +11,7 @@ import javax.ejb.Stateless;
 import javax.ejb.LocalBean;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
+import javax.persistence.Query;
 
 /**
  *
@@ -27,7 +28,8 @@ public class ShopManager {
     }
 
     public List<Shop> getAllShops() {
-        return null;
+        Query query = em.createNamedQuery("Shop.findAll");
+        return query.getResultList();
     }
     
     public Shop createShop(String name, String address, String postalCode, String town, Seller seller) {

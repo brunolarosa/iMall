@@ -15,7 +15,7 @@ import javax.persistence.*;
  */
 @Entity
 @NamedQueries({
-    @NamedQuery(name="Shop.findAll", query="SELECT s FROM Shop s"),
+    @NamedQuery(name="Shop.findAll", query="SELECT s FROM Shop s ORDER BY s.name"),
     @NamedQuery(name="Shop.finAllShopsForSeller", query="SELECT s FROM Shop s WHERE s.seller = :seller")
 })
 public class Shop implements Serializable {
@@ -29,7 +29,7 @@ public class Shop implements Serializable {
     private String postalCode;
     private String town;
     
-    @ManyToOne(cascade={CascadeType.ALL}, fetch= FetchType.EAGER)
+    @ManyToOne(cascade={CascadeType.PERSIST, CascadeType.MERGE}, fetch= FetchType.EAGER)
     private Seller seller;
     
     @OneToMany(mappedBy="shop")

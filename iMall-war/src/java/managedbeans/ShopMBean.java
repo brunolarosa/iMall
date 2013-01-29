@@ -6,6 +6,7 @@ package managedbeans;
 
 import entities.Shop;
 import java.io.Serializable;
+import java.util.List;
 import javax.ejb.EJB;
 import javax.enterprise.context.SessionScoped;
 import javax.faces.context.FacesContext;
@@ -32,7 +33,7 @@ public class ShopMBean implements Serializable {
     private String postalCode;
     private String town;
 
-    
+    private Shop currentShop;
     
     public ShopMBean() {
     }
@@ -69,8 +70,25 @@ public class ShopMBean implements Serializable {
     public void setTown(String town) {
         this.town = town;
     }
+
+    public Shop getCurrentShop() {
+        return currentShop;
+    }
+
+    public void setCurrentShop(Shop currentShop) {
+        this.currentShop = currentShop;
+    }
     
     
+    
+    public List<Shop> getAllShops() {
+        return shopManager.getAllShops();
+    }
+    
+    public String showShop(Shop shop) {
+        this.setCurrentShop(shop);
+        return "indexShop?faces-redirect=true";
+    }
     
     /* METHODS */
     public String createShop() {
