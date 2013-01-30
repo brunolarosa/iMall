@@ -22,7 +22,8 @@ import javax.persistence.NamedQuery;
  */
 @Entity
 @NamedQueries({
-    @NamedQuery(name="Product.findProductsForShop", query="SELECT p FROM Product p WHERE p.shop = :shop")
+    @NamedQuery(name="Product.findProductsForShop", query="SELECT p FROM Product p WHERE p.shop = :shop"),
+    @NamedQuery(name="Product.findProductsForCategory", query="SELECT p FROM Product p WHERE p.category = :category")
 })
 public class Product implements Serializable {
     private static final long serialVersionUID = 1L;
@@ -35,33 +36,38 @@ public class Product implements Serializable {
     @ManyToOne(cascade={CascadeType.MERGE}, fetch= FetchType.EAGER)
     private Shop shop;
     
+    private String keywords;
+    
+    @ManyToOne(cascade={CascadeType.MERGE}, fetch= FetchType.EAGER)
+    private Category category;
+    
     private String imageUrl;
     private String description;
     private double price;
     private int quantity;
 
+    
+    /* CONSTRUCTORS */
     public Product() {
     }
 
-    public Product(String name, Shop shop, String imageUrl, String description, double price, int quantity) {
+    public Product(String name, Shop shop, String imageUrl, String description, double price, int quantity, String keywords, Category category) {
         this.name = name;
         this.shop = shop;
         this.imageUrl = imageUrl;
         this.description = description;
         this.price = price;
         this.quantity = quantity;
+        this.category = category;
+        this.keywords = keywords;
     }
     
     
     
     
-
+    /* GETTERS AND SETTERS */
     public int getId() {
         return id;
-    }
-
-    public void setId(int id) {
-        this.id = id;
     }
 
     public String getName() {
@@ -74,10 +80,6 @@ public class Product implements Serializable {
 
     public Shop getShop() {
         return shop;
-    }
-
-    public void setShop(Shop shop) {
-        this.shop = shop;
     }
 
     public String getDescription() {
@@ -110,6 +112,22 @@ public class Product implements Serializable {
 
     public void setQuantity(int quantity) {
         this.quantity = quantity;
+    }
+
+    public Category getCategory() {
+        return category;
+    }
+
+    public void setCategory(Category category) {
+        this.category = category;
+    }
+
+    public String getKeywords() {
+        return keywords;
+    }
+
+    public void setKeywords(String keywords) {
+        this.keywords = keywords;
     }
     
 

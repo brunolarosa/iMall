@@ -15,6 +15,8 @@ import javax.inject.Named;
 import javax.servlet.http.HttpSession;
 import sessions.SellerManager;
 import sessions.ShopManager;
+import org.netbeans.saas.google.GoogleMapService;
+import org.netbeans.saas.RestResponse;
 
 /**
  *
@@ -23,22 +25,19 @@ import sessions.ShopManager;
 @Named(value = "sellerMBean")
 @SessionScoped
 public class SellerMBean implements Serializable {
-    
+
     @EJB
     private SellerManager sellerManager;
-    
     @EJB
     private ShopManager shopManager;
-    
-    
-    /* FIELDS */
+    /*
+     * FIELDS
+     */
     private String name;
     private String mailAddress;
     private String login;
     private String password;
-    
     private boolean connected = false;
-    
     private Seller currentSeller;
     private Shop currentShop;
 
@@ -97,71 +96,61 @@ public class SellerMBean implements Serializable {
     public void setCurrentShop(Shop currentShop) {
         this.currentShop = currentShop;
     }
-    
-    
-    
-
-    
-    
 
     /**
      * Creates a new instance of SellerMBean
      */
     public SellerMBean() {
     }
-    
+
     public List<Seller> getAllSellers() {
         return sellerManager.getAllSellers();
     }
-    
+
     public String showSeller(Seller seller) {
         this.currentSeller = seller;
         return "indexSeller?faces-redirect=true";
     }
-    
-    
+
     public Seller getSellerForId(int id) {
         return sellerManager.getSellerForId(id);
     }
-    
+
     public String showShop(Shop shop) {
         this.setCurrentShop(shop);
         return "indexShop?faces-redirect=true";
     }
-    
+
     public String signUp() {
         sellerManager.createSeller(name, login, password, mailAddress);
         name = null;
         login = null;
         password = null;
         mailAddress = null;
-        
+
         return "index.xhtml?faces-redirect=true";
     }
-    
-    
+
     public String signIn() {
-        
-        
+
+
         Seller seller = sellerManager.getSellerForLogin(login);
-        
-        if(null != seller) {
-            if(seller.getPassword().equals(password)) {
+
+        if (null != seller) {
+            if (seller.getPassword().equals(password)) {
                 this.setConnected(true);
                 login = null;
                 password = null;
                 currentSeller = seller;
             }
         }
-        
+
         return "index.xhtml?faces-redirect=true";
-       
+
     }
-    
+
     public String lougOut() {
         FacesContext.getCurrentInstance().getExternalContext().invalidateSession();
         return "index?faces-redirect=true";
     }
-    
-    
 }

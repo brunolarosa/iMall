@@ -30,9 +30,10 @@ public class InitializedManager {
     public void init() {
         
         Seller seller = new Seller("Bruno LAROSA", "bru.larosa@gmail.com", "brunolarosa", "123456");
+        persist(seller);
         Shop shop = new Shop("MyStore", "23 chemin des Martelles", "06620", "Le Bar sur Loup", seller);
         seller.getShops().add(shop);
-        
+        em.merge(seller);
         persist(shop);
         
     }

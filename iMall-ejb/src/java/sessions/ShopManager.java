@@ -35,6 +35,7 @@ public class ShopManager {
     public Shop createShop(String name, String address, String postalCode, String town, Seller seller) {
         Shop shop = new Shop(name, address, postalCode, town, seller);
         seller.getShops().add(shop);
+        em.merge(seller);
         persist(shop);
         
         return shop;

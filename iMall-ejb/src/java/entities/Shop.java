@@ -29,7 +29,7 @@ public class Shop implements Serializable {
     private String postalCode;
     private String town;
     
-    @ManyToOne(cascade={CascadeType.PERSIST, CascadeType.MERGE}, fetch= FetchType.EAGER)
+    @ManyToOne(cascade={CascadeType.MERGE}, fetch= FetchType.EAGER)
     private Seller seller;
     
     @OneToMany(mappedBy="shop")

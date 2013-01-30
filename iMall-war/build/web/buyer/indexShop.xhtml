@@ -17,47 +17,53 @@
         <div id="row-fluid">
             <div class="span4">
                 <h2>#{shopMBean.currentShop.name}</h2>
+                <h:outputText value="#{shopMBean.showGoogleMap(shopMBean.currentShop)}" escape="false" style="width: 100px;" />
             </div>
             <div class="span4 offset1">
                 <h:form>
-                   <address>
-                    <strong><h:commandLink value="#{shopMBean.currentShop.seller.name}" action="#{sellerMBean.showSeller(shopMBean.currentShop.seller)}" /></strong><br />
-                    #{shopMBean.currentShop.address}<br />
-                    #{shopMBean.currentShop.postalCode} #{shopMBean.currentShop.town}
-                </address> 
+                    <address>
+                        <strong><h:commandLink value="#{shopMBean.currentShop.seller.name}" action="#{sellerMBean.showSeller(shopMBean.currentShop.seller)}" /></strong><br />
+                        #{shopMBean.currentShop.address}<br />
+                        #{shopMBean.currentShop.postalCode} #{shopMBean.currentShop.town}
+                    </address> 
                 </h:form>
             </div>
         </div>
+        #{shopMBean.test()}
         <div id="row-fluid">
             <h:form>
-                <h:dataTable value="#{shopMBean.currentShop.products}" var="product" class="table table-hover">
-                    <h:column>
+                <p:dataTable value="#{shopMBean.currentShop.products}"
+                             var="product" 
+                             paginator="true" 
+                             rows="10"  
+                             >
+                    <p:column>
                         <f:facet name="header">
                             <h:outputText value="Icon"/>
                         </f:facet>
                         <img src="#{product.imageUrl}" class="img-rounded"/>
-                    </h:column>
-                    <h:column>
+                    </p:column>
+                    <p:column sortBy="#{product.name}">
                         <f:facet name="header">
                             <h:outputText value="Name"/>
                         </f:facet>
                         <h:commandLink value="#{product.name}" action="#{productMBean.showProduct(product)}" />
-                    </h:column>
-                    <h:column>
+                    </p:column>
+                    <p:column sortBy="#{product.price}">
                         <f:facet name="header">
                             <h:outputText value="Price"/>
                         </f:facet>
                         <h:outputText value="#{product.price}€" />
-                    </h:column>
-                    <h:column>
+                    </p:column>
+                    <p:column>
                         <f:facet name="header">
                             <h:outputText value=""/>
                         </f:facet>
                         <h:commandButton class="btn btn-success" value="Buy" action="#{buyerMBean.addProductToShoppingCart(product)}" disabled="#{!(product.quantity > 0)}"/>
-                    </h:column>
+                    </p:column>
 
 
-                </h:dataTable>
+                </p:dataTable>
             </h:form>
         </div>
     </ui:define>

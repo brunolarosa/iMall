@@ -29,6 +29,10 @@ public class ShoppingCartManager {
         this.getShoppingCart().add(product);
     }
     
+    public void deleteProduct(Product product) {
+        this.getShoppingCart().remove(product);
+    }
+    
     @Remove
     public void checkout() {
      shoppingCart.clear();

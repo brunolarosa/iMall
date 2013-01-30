@@ -4,6 +4,7 @@
  */
 package sessions;
 
+import entities.Category;
 import entities.Product;
 import entities.Seller;
 import entities.Shop;
@@ -34,10 +35,16 @@ public class ProductManager {
         query.setParameter("shop", shop);
         return query.getResultList();
     }
+    
+    public List<Product> getProductsForCategory(Category category) {
+        Query query = em.createNamedQuery("Product.findProductsForCategory");
+        query.setParameter("category", category);
+        return query.getResultList();
+    }
 
-    public Product createProduct(String name, Shop shop, String imageUrl, String description, double price, int quantity) {
+    public Product createProduct(String name, Shop shop, String imageUrl, String description, double price, int quantity, String keywords, Category category) {
 
-        Product product = new Product(name, shop, imageUrl, description, price, quantity);
+        Product product = new Product(name, shop, imageUrl, description, price, quantity, keywords, category);
         shop.getProducts().add(product);
         em.merge(shop);
         persist(product);
@@ -50,5 +57,11 @@ public class ProductManager {
     public Product mergeProduct(Product product) {
         em.merge(product);
         return product;
+    }
+    
+    public void removeProduct(Product product) {
+
+        em.remove(product);
+        em.persist(product);
     }
 }

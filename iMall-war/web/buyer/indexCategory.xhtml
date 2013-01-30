@@ -1,0 +1,70 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE composition PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition template="./templates/default.xhtml"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:p="http://primefaces.org/ui"
+                xmlns:f="http://java.sun.com/jsf/core">
+
+    <ui:define name="css">
+    </ui:define>
+
+    <ui:define name="nav">
+    </ui:define>
+
+    <ui:define name="content">
+        <div id="row-fluid">
+            <h:form>
+                <p:dataTable value="#{productMBean.categoryProducts}"
+                             var="product" 
+                             paginator="true" 
+                             rows="10"  
+                             >
+                    <p:column>
+                        <f:facet name="header">
+                            <h:outputText value="Icon"/>
+                        </f:facet>
+                        <img src="#{product.imageUrl}" class="img-rounded"/>
+                    </p:column>
+                    <p:column sortBy="#{product.name}">
+                        <f:facet name="header">
+                            <h:outputText value="Name"/>
+                        </f:facet>
+                        <h:commandLink value="#{product.name}" action="#{productMBean.showProduct(product)}" />
+                    </p:column>
+                    <p:column sortBy="#{product.shop.name}">
+                        <f:facet name="header">
+                            <h:outputText value="Store"/>
+                        </f:facet>
+                        <h:commandLink value="#{product.shop.name}" action="#{shopMBean.showShop(product.shop)}" />
+                    </p:column>
+                    <p:column sortBy="#{product.shop.seller.name}">
+                        <f:facet name="header">
+                            <h:outputText value="Seller"/>
+                        </f:facet>
+                        <h:commandLink value="#{product.shop.seller.name}" action="#{sellerMBean.showSeller(product.shop.seller)}" />
+                    </p:column>
+                    <p:column sortBy="#{product.price}">
+                        <f:facet name="header">
+                            <h:outputText value="Price"/>
+                        </f:facet>
+                        <h:outputText value="#{product.price}€" />
+                    </p:column>
+                    <p:column>
+                        <f:facet name="header">
+                            <h:outputText value=""/>
+                        </f:facet>
+                        <h:commandButton class="btn btn-success" value="Buy" action="#{buyerMBean.addProductToShoppingCart(product)}" disabled="#{!(product.quantity > 0)}"/>
+                    </p:column>
+
+
+                </p:dataTable>
+            </h:form>
+        </div>
+    </ui:define>
+
+    <ui:define name="javascript">
+    </ui:define>
+
+</ui:composition>

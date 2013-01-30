@@ -5,11 +5,11 @@
 package managedbeans;
 
 import entities.Product;
-import javax.inject.Named;
-import javax.enterprise.context.SessionScoped;
 import java.io.Serializable;
 import java.util.List;
 import javax.ejb.EJB;
+import javax.enterprise.context.SessionScoped;
+import javax.inject.Named;
 import sessions.ShoppingCartManager;
 
 /**
@@ -32,9 +32,18 @@ public class BuyerMBean implements Serializable {
         shoppingCartManager.addProduct(product);
         return "";
     }
+    public String deleteProduct(Product product) {
+        shoppingCartManager.deleteProduct(product);
+        return "";
+    }
     
     public List<Product> getShoppingCart() {
         return shoppingCartManager.getShoppingCart();
+    }
+    
+    public String showShoppingCart() {
+        
+        return "";
     }
 
 }

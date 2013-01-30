@@ -10,10 +10,12 @@
         <title>iMall</title>
 
         <!-- Bootstrap -->
-        <h:outputStylesheet library="bootstrap/css" name="bootstrap.min.css"/>
+        
+        <link href="./../resources/bootstrap/css/bootstrap.min.css" rel="stylesheet" media="screen" />
+
 
         <ui:insert name="css">
-            <link href="./resources/css/default.css" rel="stylesheet" media="screen" />
+            <h:outputStylesheet library="css" name="default.css"/>
         </ui:insert>
     </h:head>
 
@@ -26,9 +28,8 @@
         
         </ui:insert>
 
-        <script src="http://code.jquery.com/jquery-latest.js"></script>
-        <script src="../resources/bootstrap/js/bootstrap.min.js"></script>
-
+        <h:outputScript library="bootstrap/js" name="bootstrap.min.js" />
+        <script src="http://code.jquery.com/jquery-latest.js" />
         <ui:insert name="javascript"></ui:insert>
     </h:body>
 

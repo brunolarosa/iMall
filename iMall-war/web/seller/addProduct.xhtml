@@ -4,7 +4,8 @@
                 xmlns="http://www.w3.org/1999/xhtml"
                 xmlns:ui="http://java.sun.com/jsf/facelets"
                 xmlns:h="http://java.sun.com/jsf/html"
-                xmlns:f="http://java.sun.com/jsf/core">
+                xmlns:f="http://java.sun.com/jsf/core"
+                xmlns:p="http://primefaces.org/ui">
 
     <ui:define name="content">
 
@@ -17,26 +18,26 @@
 
         <h:form class="form-horizontal" rendered="#{null != productMBean.searchItems}">
 
-            <h:dataTable value="#{productMBean.searchItems}" var="item" id="searchItems" paginator="true" rows="5" class="table table-hover">
-                <h:column>
+            <p:dataTable value="#{productMBean.searchItems}" var="item" id="searchItems" paginator="true" rows="5">
+                <p:column>
                     <f:facet name="header">
                         <h:outputText value="Photo"/>
                     </f:facet>
                     <img src="#{item.galleryURL}" style="height: 80px;"/>
-                </h:column>
-                <h:column>
+                </p:column>
+                <p:column>
                     <f:facet name="header">
                         <h:outputText value="Title"/>
                     </f:facet>
                     <h:outputText value="#{item.title.substring(10)}"/>
-                </h:column>
-                <h:column>
+                </p:column>
+                <p:column>
                     <f:facet name="header">
                         <h:outputText value="Choose"/>
                     </f:facet>
-                    <h:commandButton action="#{productMBean.selectSearchItem(item)}"><i class="icon-plus" /></h:commandButton>
-                </h:column>
-            </h:dataTable>
+                    <p:commandButton action="#{productMBean.selectSearchItem(item)}" icon="ui-icon-plus"/>
+                </p:column>
+            </p:dataTable>
         </h:form>
 
         <h:form rendered="#{productMBean.itemSelected}" class="form-horizontal">
@@ -49,18 +50,36 @@
                 </div>
             </div>
             <div class="control-group">
+                <label class="control-label" for="keywords">Keywords :</label>
+                <div class="controls">
+                    <h:inputText id="keywords" class="span5" value="#{productMBean.keywords}" title="Keywords" />
+                </div>
+            </div>
+            <div class="control-group">
                 <label class="control-label" for="description">Description :</label>
                 <div class="controls">
                     <h:inputText id="description" class="span5" value="#{productMBean.description}" title="Description" />
                 </div>
             </div>
             <div class="control-group">
+                <label class="control-label" for="category">Category :</label>
+                <div class="controls">
+                    <h:inputText id="category" class="span5" value="#{productMBean.categoryName}" title="Category" />
+                </div>
+            </div>
+            <div class="control-group">
                 <label class="control-label" for="price">Price :</label>
                 <div class="controls">
                     <div class="input-prepend input-append">
-                        <h:inputText id="appendedPrependedInput" name="price" type="text" value="#{productMBean.price}"/>
+                        <h:inputText id="appendedPrependedInput" value="#{productMBean.price}"/>
                         <span class="add-on">€</span>
                     </div>
+                </div>
+            </div>
+            <div class="control-group">
+                <label class="control-label" for="quantity">Quantity :</label>
+                <div class="controls">
+                    <h:inputText id="quantity" class="span5" value="#{productMBean.quantity}" title="Quantity" />
                 </div>
             </div>
 

@@ -2,7 +2,8 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:ui="http://java.sun.com/jsf/facelets"
-      xmlns:h="http://java.sun.com/jsf/html">
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:c="http://java.sun.com/jsp/jstl/core">
 
     <h:head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
@@ -72,9 +73,11 @@
                     <div class="container-fluid">
                         <a class="brand" href="./index.xhtml">iMall</a>
                         <div class="nav-collapse collapse">
-                        <p class="navbar-text pull-right">
-                                <i class="icon-shopping-cart icon-white" />#{buyerMBean.shoppingCart.size()}
-                        </p>
+                            
+                            <p class="navbar-text pull-right">
+                                <a class="btn" href="shoppingCart.xhtml"><i class="icon-shopping-cart" />#{buyerMBean.shoppingCart.size()}</a>
+                            </p>
+
 
                         </div><!--/.nav-collapse -->
                     </div>
@@ -86,12 +89,20 @@
                     <div class="span3">
                         <div class="well sidebar-nav">
                             <ul class="nav nav-list">
-                                <li class="nav-header">Shops</li>
-                                <li><a href="./index.xhtml">All Shops</a></li>
-                                
-                                <li class="nav-header">Sellers</li>
-                                <li><a href="./sellers.xhtml">All Sellers</a></li>
-                                <ui:insert name="nav"></ui:insert>
+                                <h:form>
+                                    <li class="nav-header">Shops</li>
+                                    <li><h:commandLink value="All Shops" action="index?faces-redirect=true" /></li>
+
+                                    <li class="nav-header">Sellers</li>
+                                    <li><h:commandLink value="All Sellers" action="indexSellers?faces-redirect=true" /></li>
+
+
+                                    <li class="nav-header">Categories</li>
+                                    <c:forEach items="#{productMBean.allCategories}" var="category">
+                                        <li><h:commandLink value="#{category.name}" action="#{productMBean.showCategory(category)}" /></li>
+                                    </c:forEach>
+                                    <ui:insert name="nav"></ui:insert>
+                                </h:form>
                             </ul>
                         </div><!--/.well -->
                     </div><!--/span-->
